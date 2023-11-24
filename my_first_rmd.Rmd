@@ -1,0 +1,32 @@
+---
+title: "My_first_rmd"
+author: "S.Q.Yong"
+date: "2023-11-24"
+output: html_document
+---
+
+# Heading 1
+## Heading 2
+### Heading 3
+
+This is a bold text:**bold1**, or _bold_.
+
+This is italic test: *italic1*, or _italic_
+
+This is superscript text: test^1^
+
+This is a subscript text: test~2~
+
+This is an inline code 'code3'
+
+This is a mistake: ~~wrong~~
+
+Line breaks 1 - two spaces    
+Line breaks 2 - '\' and space \    
+line breaks 3 - empty line in between (before next line)    
+
+for testing
+
+
+
+
