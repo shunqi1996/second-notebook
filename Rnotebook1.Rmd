@@ -1,0 +1,70 @@
+---
+title: "my_first_rmd"
+author: "S.Q.Yong"
+date: "2023-11-24"
+output: html_document
+---
+
+```{r first_chunk, include=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(dplyr)
+a<-4
+print(a)
+
+```
+
+
+```{r load_data}
+
+  #load tidyverse library
+  install.packages(kableExtra)
+  library(tidyverse)
+  library(rmarkdown)
+  library(kableExtra)
+  library(ggpubr)
+
+  pop_data <- read_csv("Data/gapminder_data.csv")
+  
+  euro_data_tbl<-pop_data%>%
+    filter(continent=="Europe" & year==2007)%>%
+    select(-continent,-year)%>%
+    arrange(desc(lifeExp))%>%
+    rename(Country=country,"Population Size"=pop, "Life Expectancy"= lifeExp, "GDP"= gdpPercap)
+  
+```
+
+```{r show_table, message=FALSE}
+
+  euro_data_tbl%>%kbl()%>%
+  kable_styling(bootstrap_options=c("striped","hover"))
+
+```
+
+
+```{r paged-table}
+paged_table(euro_data_tbl)
+```
+
+```{r fig-data}
+#keep on European data and change year to factor
+euro_data_fig <- pop_data %>% 
+                    filter(continent == "Europe")  %>% 
+                    mutate(year=as_factor(year))
+```
+
+
+
+```{r plot, message=FALSE}
+
+library(ggplot2)
+
+euro_plot <- euro_data_fig %>%
+                ggplot(mapping=aes(x=year, y=lifeExp)) +
+                geom_violin() +
+                stat_summary(fun.y = median, geom = "point")
+
+euro_plot
+
+```
+
+
